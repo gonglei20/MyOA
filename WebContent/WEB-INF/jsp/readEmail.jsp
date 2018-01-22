@@ -45,7 +45,7 @@
 	</head>
   
   <body>
-    <div class="nav" id="nav">
+  <div class="nav" id="nav">
 					<div class="t"></div>
 					<dl>
 							<dt onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">信息管理 
@@ -74,11 +74,11 @@
 							onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">
 							考勤管理
 						</dt>
-						<c:if test="${sessionUser.isadmin == 0 }">
+						
 						<dd>
 							<a href="forwardLeave.do" target="_self">休假</a>
 						</dd>
-						</c:if>
+					
 						
 						<c:if test="${sessionUser.isadmin == 1 }">
 						<dd>
@@ -93,13 +93,16 @@
 							onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">
 							权限管理
 						</dt>
+						<c:if test="${sessionUser.isadmin == 0 }">
 						<dd>
-							<a href="forwardPersonAccount.do" target="_self">个人账户</a>
+							<a href="forwardLeave.do" target="_self">休假</a>
 						</dd>
+					</c:if>
+						<c:if test="${sessionUser.isadmin == 1 }">
 						<dd>
 							<a href="adminAccount.do" target="_self">管理账户</a>
 						</dd>
-						
+							</c:if>
 					</dl>
 				</div>
   </body>

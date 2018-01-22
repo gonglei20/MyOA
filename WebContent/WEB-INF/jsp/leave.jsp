@@ -60,13 +60,13 @@
 							邮件管理
 						</dt>
 						<dd>
-							<a href="mailWrite.action" target="_self">写邮件</a>
+							<a href="writeEmail.do" target="_self">写邮件</a>
 						</dd>
 						<dd>
-							<a href="mailReceive!receive.action" target="_self">收邮件</a>
+							<a href="receiveEmail.do" target="_self">收邮件</a>
 						</dd>
 						<dd>
-							<a href="mailGarage!garage.action" target="_self">垃圾邮件</a>
+							<a href="garageEmail.do" target="_self">垃圾邮件</a>
 						</dd>
 					</dl>
 					<dl>
@@ -78,12 +78,9 @@
 						<dd>
 							<a href="forwardLeave.do" target="_self">休假</a>
 						</dd>
-						</c:if>
+					</c:if>
 						
 						<c:if test="${sessionUser.isadmin == 1 }">
-						<dd>
-							<a href="forwardLeave.do" target="_self">休假</a>
-						</dd>
 						<dd>
 							<a href="forwardCheck.do" target="_self">审核休假</a>
 						</dd>
@@ -96,13 +93,16 @@
 							onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">
 							权限管理
 						</dt>
+						
 						<dd>
 							<a href="forwardPersonAccount.do" target="_self">个人账户</a>
 						</dd>
+					
+						<c:if test="${sessionUser.isadmin == 1 }">
 						<dd>
 							<a href="adminAccount.do" target="_self">管理账户</a>
 						</dd>
-						
+							</c:if>
 					</dl>
 				</div>
   </body>
@@ -118,12 +118,12 @@
 						<div class="pages">
 							<table width="90%" border="0" cellspacing="0" cellpadding="0">
 								<tr >
-									<td width="15%">申请人</td>
-									<td  width="15%">开始时间</td>
-									<td  width="20%">结束时间</td>
-									<td  width="20%">天数</td>
-									<td  width="20%">审批状态</td>
-									<td  width="20%">原因</td>
+									<td>申请人</td>
+									<td>开始时间</td>
+									<td>结束时间</td>
+									<td>天数</td>
+									<td>审批状态</td>
+									<td>原因</td>
 								</tr>
 								<c:forEach items="${leaveSession }" var="leave">
 									<tr >

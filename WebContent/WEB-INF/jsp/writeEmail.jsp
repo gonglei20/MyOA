@@ -6,13 +6,39 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>办公自动化管理系统</title>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.8.3.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validate.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/messages_zh.js"></script>
 		<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" />
-		<script>
-			function setit()
-			{
-				document.forms[0].submit();
-			}
-		</script>
+<script>
+function upload(ele){
+	
+	if(ele.files[0].size>9437184){
+		alert("文件不允许超过9M");
+		$("#sendEmail").attr('disabled',true);  
+	}else{
+		$("#sendEmail").attr('disabled',false);
+	}
+}
+</script>
+<script type="text/javascript">
+
+//表单校验
+$(function() {
+	$("#myForm").validate({
+						rules : {
+							emailtitle:{
+								required:true
+							}
+						},
+						messages : {
+							emailtitle :{
+								required:"邮件标题不能为空"
+								} 
+						}
+					});
+})
+</script>
 	</head>
 	
 	<body>
@@ -46,7 +72,7 @@
 	</head>
   
   <body>
-    <div class="nav" id="nav">
+     <div class="nav" id="nav">
 					<div class="t"></div>
 					<dl>
 							<dt onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">信息管理 
@@ -79,8 +105,7 @@
 						<dd>
 							<a href="forwardLeave.do" target="_self">休假</a>
 						</dd>
-						</c:if>
-						
+					</c:if>
 						<c:if test="${sessionUser.isadmin == 1 }">
 						<dd>
 							<a href="forwardCheck.do" target="_self">审核休假</a>
@@ -94,19 +119,22 @@
 							onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">
 							权限管理
 						</dt>
+						
 						<dd>
 							<a href="forwardPersonAccount.do" target="_self">个人账户</a>
 						</dd>
+					
+						<c:if test="${sessionUser.isadmin == 1 }">
 						<dd>
 							<a href="adminAccount.do" target="_self">管理账户</a>
 						</dd>
-						
+							</c:if>
 					</dl>
 				</div>
   </body>
 </html>
 
-	<!-- 个人信息-->
+	<!-- 写邮件-->
  					<div class="action">
 						<div class="t">
 							写邮件
@@ -114,8 +142,8 @@
 						<div class="pages">
 							<table width="90%" border="0" cellspacing="0" cellpadding="0">
 								<tr >
-									<td align="right" width="30%">收件人：</td>
-									<td  align="left">
+									<td style="padding-top: 10px" align="right" width="30%">收件人：</td>
+									<td style="padding-top: 10px" align="left">
 									<select name="receiveuser" id="receiveuser">
 									<c:forEach items="${allUserSession }" var="allUser">
 										<option>${allUser.username }</option>
@@ -124,26 +152,30 @@
 									</td>
 								</tr>
 								<tr >
-									<td align="right" width="30%">邮件标题：</td>
-									<td  align="left">
+									<td style="padding-top: 10px" align="right" width="30%"><label style="color: red">*</label>邮件标题：</td>
+									<td style="padding-top: 10px" align="left">
 									<input type="text" name="emailtitle" id="emailtitle" /> 
 									</td>
 								</tr>
 								
 								<tr >
-									<td align="right" width="30%">邮件内容：</td>
-									<td  align="left">
+									<td style="padding-top: 10px" align="right" width="30%">邮件内容：</td>
+									<td style="padding-top: 10px" align="left">
 									<textarea rows="10" cols="40" name="emailvalue"></textarea>
 									</td>
 								</tr>
 								<tr >
-									<td align="right" width="30%">附件上传：</td>
-									<td  align="left">
-									<input type="file" name="file"  />
+									
+									<td style="padding-top: 10px" align="right" width="30%"><label style="color: red">*</label>附件上传：</td>
+									<td style="padding-top: 10px" align="left">
+									<input type="file" name="file" onchange="upload(this)" />
+									
 									</td>
 								</tr> 
 								<tr >
-									<td align="center" colspan="2"><br/><input type="submit"  id="save" value="发送邮件"  />
+									<td style="padding-top: 10px" align="center" colspan="2"><br/>
+									<input type="submit"  id="sendEmail" value="发送邮件" />
+					
 								</tr>
 								</table>
 								

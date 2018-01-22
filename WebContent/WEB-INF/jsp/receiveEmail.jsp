@@ -13,6 +13,20 @@
 				document.forms[0].submit();
 			}
 		</script>
+			<script>
+			window.onload = function(){
+				var mtb = document.getElementById("mtb");
+				for(var i=0;i<mtb.tBodies[0].rows.length;i++){
+					if(i%2==0){
+						//奇数行
+						mtb.tBodies[0].rows[i].style.backgroundColor = "white";
+					}else{
+						//偶数行
+						mtb.tBodies[0].rows[i].style.backgroundColor = "#D3D3D3";
+					}
+				}
+			}
+		</script>
 	</head>
 	
 	<body>
@@ -74,12 +88,11 @@
 							onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">
 							考勤管理
 						</dt>
-						<c:if test="${sessionUser.isadmin == 0 }">
+					<c:if test="${sessionUser.isadmin == 0 }">
 						<dd>
 							<a href="forwardLeave.do" target="_self">休假</a>
 						</dd>
-						</c:if>
-						
+					</c:if>
 						<c:if test="${sessionUser.isadmin == 1 }">
 						<dd>
 							<a href="forwardCheck.do" target="_self">审核休假</a>
@@ -93,13 +106,16 @@
 							onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">
 							权限管理
 						</dt>
+						
 						<dd>
 							<a href="forwardPersonAccount.do" target="_self">个人账户</a>
 						</dd>
+					
+						<c:if test="${sessionUser.isadmin == 1 }">
 						<dd>
 							<a href="adminAccount.do" target="_self">管理账户</a>
 						</dd>
-						
+							</c:if>
 					</dl>
 				</div>
   </body>
@@ -111,7 +127,7 @@
 							收邮件
 						</div>
 						<div class="pages">
-							<table width="90%" border="0" cellspacing="0" cellpadding="0">
+							<table id="mtb" width="90%" border="0" cellspacing="0" cellpadding="0">
 								<tr >
 									<td width="10%">邮件标题</td>
 									<td  width="10%">内容</td>
@@ -140,10 +156,6 @@
 									</tr>
 									</c:if>
 								</c:forEach>
-							
-								<tr >
-									<td align="center" colspan="2"><br/><input type="submit"  id="save" value="发送邮件"  />
-								</tr>
 								</table>
 								
 						</div>

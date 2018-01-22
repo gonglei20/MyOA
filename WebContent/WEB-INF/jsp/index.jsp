@@ -74,11 +74,11 @@
 							onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">
 							考勤管理
 						</dt>
-						
+						<c:if test="${sessionUser.isadmin == 0 }">
 						<dd>
 							<a href="forwardLeave.do" target="_self">休假</a>
 						</dd>
-					
+					</c:if>
 						
 						<c:if test="${sessionUser.isadmin == 1 }">
 						<dd>
@@ -107,6 +107,9 @@
 				</div>
   </body>
 </html>
+<h1 align="center" style="margin:auto;padding-top: 70px">
+<a href="forwardPersonInfo.do">[${sessionUser.username }]</a> 您好! 欢迎登陆办公管理系统
+</h1>
 
 			</div>
 		</div>

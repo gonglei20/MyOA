@@ -55,13 +55,13 @@
 							邮件管理
 						</dt>
 						<dd>
-							<a href="mailWrite.action" target="_self">写邮件</a>
+							<a href="writeEmail.do" target="_self">写邮件</a>
 						</dd>
 						<dd>
-							<a href="mailReceive!receive.action" target="_self">收邮件</a>
+							<a href="receiveEmail.do" target="_self">收邮件</a>
 						</dd>
 						<dd>
-							<a href="mailGarage!garage.action" target="_self">垃圾邮件</a>
+							<a href="garageEmail.do" target="_self">垃圾邮件</a>
 						</dd>
 					</dl>
 					<dl>
@@ -69,16 +69,15 @@
 							onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">
 							考勤管理
 						</dt>
+						
 						<c:if test="${sessionUser.isadmin == 0 }">
 						<dd>
 							<a href="forwardLeave.do" target="_self">休假</a>
 						</dd>
-						</c:if>
+					</c:if>
+					
 						
 						<c:if test="${sessionUser.isadmin == 1 }">
-						<dd>
-							<a href="forwardLeave.do" target="_self">休假</a>
-						</dd>
 						<dd>
 							<a href="forwardCheck.do" target="_self">审核休假</a>
 						</dd>
@@ -91,13 +90,16 @@
 							onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">
 							权限管理
 						</dt>
+						
 						<dd>
 							<a href="forwardPersonAccount.do" target="_self">个人账户</a>
 						</dd>
+					
+						<c:if test="${sessionUser.isadmin == 1 }">
 						<dd>
 							<a href="adminAccount.do" target="_self">管理账户</a>
 						</dd>
-						
+							</c:if>
 					</dl>
 				</div>
   </body>

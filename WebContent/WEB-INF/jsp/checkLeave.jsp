@@ -8,9 +8,17 @@
 		<title>办公自动化管理系统</title>
 		<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" />
 		<script>
-			function setit()
-			{
-				document.forms[0].submit();
+			window.onload = function(){
+				var mtb = document.getElementById("mtb");
+				for(var i=0;i<mtb.tBodies[0].rows.length;i++){
+					if(i%2==0){
+						//奇数行
+						mtb.tBodies[0].rows[i].style.backgroundColor = "white";
+					}else{
+						//偶数行
+						mtb.tBodies[0].rows[i].style.backgroundColor = "#D3D3D3";
+					}
+				}
 			}
 		</script>
 	</head>
@@ -60,13 +68,13 @@
 							邮件管理
 						</dt>
 						<dd>
-							<a href="mailWrite.action" target="_self">写邮件</a>
+							<a href="writeEmail.do" target="_self">写邮件</a>
 						</dd>
 						<dd>
-							<a href="mailReceive!receive.action" target="_self">收邮件</a>
+							<a href="receiveEmail.do" target="_self">收邮件</a>
 						</dd>
 						<dd>
-							<a href="mailGarage!garage.action" target="_self">垃圾邮件</a>
+							<a href="garageEmail.do" target="_self">垃圾邮件</a>
 						</dd>
 					</dl>
 					<dl>
@@ -74,11 +82,11 @@
 							onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">
 							考勤管理
 						</dt>
-						<c:if test="${sessionUser.isadmin == 0 }">
+						
 						<dd>
 							<a href="forwardLeave.do" target="_self">休假</a>
 						</dd>
-						</c:if>
+					
 						
 						<c:if test="${sessionUser.isadmin == 1 }">
 						<dd>
@@ -93,13 +101,16 @@
 							onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">
 							权限管理
 						</dt>
+						<c:if test="${sessionUser.isadmin == 0 }">
 						<dd>
-							<a href="forwardPersonAccount.do" target="_self">个人账户</a>
+							<a href="forwardLeave.do" target="_self">休假</a>
 						</dd>
+					</c:if>
+						<c:if test="${sessionUser.isadmin == 1 }">
 						<dd>
 							<a href="adminAccount.do" target="_self">管理账户</a>
 						</dd>
-						
+							</c:if>
 					</dl>
 				</div>
   </body>
@@ -113,18 +124,19 @@
 							休假信息列表
 						</div>
 						<div class="pages">
-							<table width="90%" border="0" cellspacing="0" cellpadding="0">
-								<tr >
-									<td width="10%">申请人</td>
-									<td  width="10%">开始时间</td>
-									<td  width="10%">结束时间</td>
-									<td  width="10%">天数</td>
-									<td  width="10%">审批状态</td>
-									<td  width="10%">原因</td>
-									<td  width="30%">操作</td>
+							<table id="mtb" width="90%" border="0" cellspacing="0" cellpadding="0">
+
+								<tr align="center">
+									<td >申请人</td>
+									<td >开始时间</td>
+									<td >结束时间</td>
+									<td >天数</td>
+									<td>审批状态</td>
+									<td>原因</td>
+									<td>操作</td>
 								</tr>
 								<c:forEach items="${leaveSessionByCheck }" var="checkLeave">
-									<tr >
+									<tr align="center">
 									<td width="15%">${checkLeave.username } </td>
 									<td  width="15%">${checkLeave.starttime }</td>
 									<td  width="20%">${checkLeave.endtime }</td>

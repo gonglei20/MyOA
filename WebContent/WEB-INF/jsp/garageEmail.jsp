@@ -7,12 +7,19 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>办公自动化管理系统</title>
 		<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" />
-		<script>
-			function setit()
-			{
-				document.forms[0].submit();
+			<script>
+			window.onload = function(){
+				var mtb = document.getElementById("mtb");
+				for(var i=0;i<mtb.tBodies[0].rows.length;i++){
+					if(i%2==0){
+						//奇数行
+						mtb.tBodies[0].rows[i].style.backgroundColor = "white";
+					}else{
+						//偶数行
+						mtb.tBodies[0].rows[i].style.backgroundColor = "#D3D3D3";
+					}
+				}
 			}
-			
 		</script>
 	</head>
 	
@@ -75,11 +82,11 @@
 							onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">
 							考勤管理
 						</dt>
-						<c:if test="${sessionUser.isadmin == 0 }">
+						
 						<dd>
 							<a href="forwardLeave.do" target="_self">休假</a>
 						</dd>
-						</c:if>
+					
 						
 						<c:if test="${sessionUser.isadmin == 1 }">
 						<dd>
@@ -94,13 +101,16 @@
 							onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">
 							权限管理
 						</dt>
+						<c:if test="${sessionUser.isadmin == 0 }">
 						<dd>
-							<a href="forwardPersonAccount.do" target="_self">个人账户</a>
+							<a href="forwardLeave.do" target="_self">休假</a>
 						</dd>
+					</c:if>
+						<c:if test="${sessionUser.isadmin == 1 }">
 						<dd>
 							<a href="adminAccount.do" target="_self">管理账户</a>
 						</dd>
-						
+							</c:if>
 					</dl>
 				</div>
   </body>
@@ -112,7 +122,7 @@
 							垃圾邮件列表
 						</div>
 						<div class="pages">
-							<table width="90%" border="0" cellspacing="0" cellpadding="0">
+							<table id="mtb" width="90%" border="0" cellspacing="0" cellpadding="0">
 								<tr >
 									<td width="10%">邮件标题</td>
 									<td  width="10%">内容</td>

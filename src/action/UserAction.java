@@ -162,7 +162,7 @@ public class UserAction {
 		List<Leave> findLeave = ser.findLeave(username);
 		session.setAttribute("leaveSession", findLeave);
 
-		return "leave";
+		return "redirect:forwardLeave.do";
 	}
 
 	// 审核页面
@@ -189,11 +189,14 @@ public class UserAction {
 	}
 	//审核通过
 	@RequestMapping(value = "/checkPass.do")
-	public String pass(Leave leave, HttpSession session) {
-		List<Leave> leaveStatus = (List<Leave>) session.getAttribute("leaveSessionByCheck");
-		for (Leave leave2 : leaveStatus) {
-			ser.updateStatus(leave2.getId());
-		}
+	public String pass(Leave leave, HttpSession session,HttpServletRequest request) {
+		Integer id =Integer.valueOf(request.getParameter("id"));
+		ser.updateStatus(id);
+		
+//		List<Leave> leaveStatus = (List<Leave>) session.getAttribute("leaveSessionByCheck");
+//		for (Leave leave2 : leaveStatus) {
+//			ser.updateStatus(leave2.getId());
+//		}
 		User user = (User) session.getAttribute("sessionUser");
 		String checkman = user.getUsername();
 		List<Leave> findAllLeave = ser.findLeaveByCheckman(checkman);
@@ -203,11 +206,13 @@ public class UserAction {
 	}
 	//审核不通过
 	@RequestMapping(value = "/checkFail.do")
-	public String fail(Leave leave, HttpSession session) {
-		List<Leave> leaveStatus = (List<Leave>) session.getAttribute("leaveSessionByCheck");
+	public String fail(Leave leave, HttpSession session,HttpServletRequest request) {
+		Integer id =Integer.valueOf(request.getParameter("id"));
+		ser.updateStatus2(id);
+		/*List<Leave> leaveStatus = (List<Leave>) session.getAttribute("leaveSessionByCheck");
 		for (Leave leave2 : leaveStatus) {
 			ser.updateStatus2(leave2.getId());
-		}
+		}*/
 		User user = (User) session.getAttribute("sessionUser");
 		String checkman = user.getUsername();
 		List<Leave> findAllLeave = ser.findLeaveByCheckman(checkman);

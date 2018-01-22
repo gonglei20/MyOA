@@ -40,7 +40,7 @@
 	</head>
   
   <body>
-    <div class="nav" id="nav">
+     <div class="nav" id="nav">
 					<div class="t"></div>
 					<dl>
 							<dt onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">信息管理 
@@ -55,13 +55,13 @@
 							邮件管理
 						</dt>
 						<dd>
-							<a href="mailWrite.action" target="_self">写邮件</a>
+							<a href="writeEmail.do" target="_self">写邮件</a>
 						</dd>
 						<dd>
-							<a href="mailReceive!receive.action" target="_self">收邮件</a>
+							<a href="receiveEmail.do" target="_self">收邮件</a>
 						</dd>
 						<dd>
-							<a href="mailGarage!garage.action" target="_self">垃圾邮件</a>
+							<a href="garageEmail.do" target="_self">垃圾邮件</a>
 						</dd>
 					</dl>
 					<dl>
@@ -73,12 +73,8 @@
 						<dd>
 							<a href="forwardLeave.do" target="_self">休假</a>
 						</dd>
-						</c:if>
-						
+					</c:if>
 						<c:if test="${sessionUser.isadmin == 1 }">
-						<dd>
-							<a href="forwardLeave.do" target="_self">休假</a>
-						</dd>
 						<dd>
 							<a href="forwardCheck.do" target="_self">审核休假</a>
 						</dd>
@@ -91,13 +87,16 @@
 							onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">
 							权限管理
 						</dt>
+						
 						<dd>
 							<a href="forwardPersonAccount.do" target="_self">个人账户</a>
 						</dd>
+					
+						<c:if test="${sessionUser.isadmin == 1 }">
 						<dd>
 							<a href="adminAccount.do" target="_self">管理账户</a>
 						</dd>
-						
+							</c:if>
 					</dl>
 				</div>
   </body>
@@ -105,7 +104,7 @@
 
 
 
-					<!-- 个人信息-->
+					<!-- 申请休假-->
  					<div class="action">
 						<div class="t">
 							申请休假
@@ -152,8 +151,8 @@
 								</tr>
 								<tr >
 									<td align="center" colspan="2"><br/>
-									<a href="checkPass.do"><input type="button"  value="审核通过"  /></a>
-									<a href="checkFail.do"><input type="button" value="审核不通过"  /></a></td>
+									<a href="checkPass.do?id=${leaveInfo.id }"><input type="button"  value="审核通过"  /></a>
+									<a href="checkFail.do?id=${leaveInfo.id }"><input type="button" value="审核不通过"  /></a></td>
 								</tr>
 								</table>
 								

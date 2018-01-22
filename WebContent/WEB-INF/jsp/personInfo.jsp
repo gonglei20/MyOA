@@ -7,18 +7,6 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>办公自动化管理系统</title>
 		<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" />
-		<script>
-			function setit()
-			{
-				
-				/* document.all.nickname.readOnly = false;
-				document.all.age.readOnly = false;
-				document.all.sex.readOnly = false;
-				document.all.u_mobile.readOnly = false;
-				document.all.u_address.readOnly = false; */
-				//document.forms[0].submit();
-			}
-		</script>
 	</head>
 	
 	<body>
@@ -51,7 +39,7 @@
 	</head>
   
   <body>
-    <div class="nav" id="nav">
+     <div class="nav" id="nav">
 					<div class="t"></div>
 					<dl>
 							<dt onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">信息管理 
@@ -66,13 +54,13 @@
 							邮件管理
 						</dt>
 						<dd>
-							<a href="mailWrite.action" target="_self">写邮件</a>
+							<a href="writeEmail.do" target="_self">写邮件</a>
 						</dd>
 						<dd>
-							<a href="mailReceive!receive.action" target="_self">收邮件</a>
+							<a href="receiveEmail.do" target="_self">收邮件</a>
 						</dd>
 						<dd>
-							<a href="mailGarage!garage.action" target="_self">垃圾邮件</a>
+							<a href="garageEmail.do" target="_self">垃圾邮件</a>
 						</dd>
 					</dl>
 					<dl>
@@ -80,9 +68,17 @@
 							onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">
 							考勤管理
 						</dt>
+						
 						<dd>
-							<a href="leave.action" target="_self">休假</a>
+							<a href="forwardLeave.do" target="_self">休假</a>
 						</dd>
+					
+						
+						<c:if test="${sessionUser.isadmin == 1 }">
+						<dd>
+							<a href="forwardCheck.do" target="_self">审核休假</a>
+						</dd>
+						</c:if>
 					</dl>
 					
 					<dl >
@@ -91,19 +87,20 @@
 							onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">
 							权限管理
 						</dt>
+						<c:if test="${sessionUser.isadmin == 0 }">
 						<dd>
-							<a href="forwardPersonAccount.do" target="_self">个人账户</a>
+							<a href="forwardLeave.do" target="_self">休假</a>
 						</dd>
+					</c:if>
+						<c:if test="${sessionUser.isadmin == 1 }">
 						<dd>
 							<a href="adminAccount.do" target="_self">管理账户</a>
 						</dd>
+							</c:if>
 					</dl>
 				</div>
   </body>
 </html>
-
- <%-- <%@ include file="personInfo.jsp"%> --%>
-
 
 					<!-- 个人信息 -->
  					<div class="action">
@@ -112,29 +109,43 @@
 						</div>
 						<div class="pages">
 							<table width="90%" border="0" cellspacing="0" cellpadding="0">
-								<tr >
-									<td align="right" width="30%">昵称：</td><td  align="left"><input type="text" name="username" value="${sessionUser.username }" readonly="readonly" id="nickname"/></td>
+								<tr>
+									<td style="padding-top: 15px" align="right" width="30%">昵称：</td>
+									<td style="padding-top: 15px" align="left">
+										<input type="text" name="username" value="${sessionUser.username }" disabled="disabled" id="nickname"/>
+									</td>
 								</tr>
-								<tr >
-									<td align="right" width="30%">年龄：</td><td  align="left"><input type="text" name="u.age" value="${sessionUser.age }" readonly="readonly" id="age"/></td>
-								</tr>
-								<tr >
-									<td align="right" width="30%">性别：</td><td  align="left">
-									
-										<input type="text" name="" value="${sessionUser.sex }" readonly="readonly" id="sex"/>
-									
+								<tr>	
+									<td style="padding-top: 15px" align="right" width="30%">年龄：</td>
+									<td style="padding-top: 15px" align="left">
+									<input type="text" name="u.age" value="${sessionUser.age }" disabled="disabled" id="age"/>
 									</td>
 								</tr>
 								<tr >
-									<td align="right" width="30%">手机：</td><td  align="left"><input type="text" name="u.mobile" value="${sessionUser.phone }" readonly="readonly" id="u_mobile"/></td>
+									<td style="padding-top: 15px" align="right" width="30%">性别：</td>
+									<td style="padding-top: 15px" align="left">
+										<input type="text" name="" value="${sessionUser.sex }" disabled="disabled" id="sex"/>
+									</td>
 								</tr>
 								<tr >
-									<td align="right" width="30%">地址：</td><td  align="left"><input type="text" name="u.address" value="${sessionUser.address }" readonly="readonly" id="u_address"/></td>
+									<td style="padding-top: 15px" align="right" width="30%">手机：</td>
+									<td style="padding-top: 15px" align="left">
+										<input type="text" name="u.mobile" value="${sessionUser.phone }" disabled="disabled" id="u_mobile"/>
+									</td>
 								</tr>
 								<tr >
-									<td align="center" colspan="2"><br/><a href="forwardEditPersonInfo.do"><input type="button"  id="save" value="编辑数据"  /></a></td>
+									<td style="padding-top: 15px" align="right" width="30%">地址：</td>
+									<td style="padding-top: 15px" align="left">
+										<input type="text" name="u.address" value="${sessionUser.address }" disabled="disabled" id="u_address"/>
+									</td>
 								</tr>
-								
+								<tr >
+									<td style="padding-top: 15px" align="center" colspan="2"><br/>
+										<a href="forwardEditPersonInfo.do">
+											<input type="button"  id="save" value="编辑数据"  />
+										</a>
+									</td>
+								</tr>
 								</table>
 								
 						</div>

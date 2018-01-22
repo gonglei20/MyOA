@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--映射接口-->
+<mapper namespace="mapper.UserMapper">
+	
+	<select id="selectByName" parameterType="User" resultType="User">
+		  select * from user where username =#{username}
+	</select>
+	<select id="findAllAdmin" parameterType="User" resultType="User">
+		  select * from user where isadmin =#{isadmin}
+	</select>
+	<update id="saveUser" parameterType="User">
+		update user set username =#{username},age=#{age},sex=#{sex},phone=#{phone},address=#{address} where id =#{id}
+	</update>
+	
+		<update id="saveUserRoot" parameterType="User">
+		update user set username =#{username},password=#{password} where id =#{id}
+	</update>
+	<select id="findAllUser"  resultType="User">
+		  select * from user
+	</select>
+	<insert id="insertUser" parameterType="User">
+		insert into user(username,password,sex,address,age,phone)  values(#{username},#{password},#{sex},#{address},#{age},#{phone})
+	</insert>
+	<select id="findLeave" parameterType="String" resultType="Leave">
+		SELECT id,username,DATE_FORMAT(starttime,'%Y-%m-%d') AS starttime,DATE_FORMAT(endtime,'%Y-%m-%d' ) AS endtime,DAY,STATUS,reason,checkman FROM userleave WHERE username=#{username}
+	</select>
+	
+	<insert id="insertLeaveReason" parameterType="Leave">
+		insert into userleave(username,starttime,endtime,day,reason,checkman)  values(#{username},#{starttime},#{endtime},#{day},#{reason},#{checkman})
+	</insert>
+	
+		<select id="findLeaveByCheckman" parameterType="String" resultType="Leave">
+		  select * from userleave where checkman =#{checkman}
+	</select>
+	<!-- 审核请假详情 -->
+		<select id="findLeaveById" parameterType="Integer" resultType="Leave">
+		  select * from userleave where id =#{id}
+	</select>
+		<update id="updateStatus" parameterType="Integer">
+		  
+		  update userleave set status=1  where id =#{id};
+	</update>
+		<update id="updateStatus2" parameterType="Integer">
+		  
+		  update userleave set status=2  where id =#{id};
+	</update>
+	<!-- 发送邮件 -->
+	<insert id="insertEmail" parameterType="Leave">
+		insert into useremail(senduser,receiveuser,emailtitle,emailvalue,fujian)  values(#{senduser},#{receiveuser},#{emailtitle},#{emailvalue},#{fujian})
+	</insert>
+	<!-- 接收邮件 -->
+		<select id="findEmailByreceiveUser" parameterType="String" resultType="Email">
+		  select * from useremail where receiveuser =#{receiveuser}
+	</select>
+	<!-- 是否删除并进入回收站 -->
+	<update id="updateIsgarageById" parameterType="Integer" >
+		update useremail set isgarage=1 where id = #{id}
+	</update>
+	<update id="updateIsgarageById2" parameterType="Integer" >
+		update useremail set isgarage=0 where id = #{id}
+	</update>
+	<delete id="DeleteEmailReallyById" parameterType="Integer">
+	delete from useremail where id = #{id}
+	</delete>
+		<!-- 查找没有进入回收站的数据 -->
+		<select id="findAllEmailByIsgarage" parameterType="Email" resultType="Email">
+		  select * from useremail where isgarage =#{isgarage} and receiveuser =#{receiveuser}
+	</select>
+	
+	<!-- 通过id查找指定的邮件（读取功能） -->
+		<select id="findEmailById" parameterType="Integer" resultType="Email">
+		  select * from useremail where id =#{id}
+	</select>
+	<!--更新是否未读状态(查看邮件详细信息后返回邮件列表)  -->
+	<update id="updateIsreadById" parameterType="Integer" >
+		update useremail set isread=1 where id = #{id}
+	</update>
+</mapper>

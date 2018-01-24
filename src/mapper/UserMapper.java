@@ -45,6 +45,7 @@ public interface UserMapper {
 	List<User> findAllAdmin(Integer isadmin);
 	//审核请假详情
 	Leave findLeaveById(Integer id);
+	void insertEmail2(Email email);
 
 	
 	

@@ -18,8 +18,8 @@
 		<div class="status">
 			<div class="global-width">
 				${sessionUser.username }你好！欢迎访问办公管理系统！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="location.href='loginOut.do'";>注销</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#" onclick="location.href='loginOut.do'";>注销</a>
 			</div>
 		</div>
 		<form id="myForm" name="myForm" action="userInfo!editData.action" method="post">
@@ -68,11 +68,11 @@
 							onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">
 							考勤管理
 						</dt>
-						
+						<c:if test="${sessionUser.isadmin == 0 }">
 						<dd>
 							<a href="forwardLeave.do" target="_self">休假</a>
 						</dd>
-					
+					</c:if>
 						
 						<c:if test="${sessionUser.isadmin == 1 }">
 						<dd>
@@ -87,11 +87,10 @@
 							onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">
 							权限管理
 						</dt>
-						<c:if test="${sessionUser.isadmin == 0 }">
 						<dd>
-							<a href="forwardLeave.do" target="_self">休假</a>
+							<a href="forwardPersonAccount.do" target="_self">个人账户</a>
 						</dd>
-					</c:if>
+					
 						<c:if test="${sessionUser.isadmin == 1 }">
 						<dd>
 							<a href="adminAccount.do" target="_self">管理账户</a>
@@ -110,7 +109,7 @@
 						<div class="pages">
 							<table width="90%" border="0" cellspacing="0" cellpadding="0">
 								<tr>
-									<td style="padding-top: 15px" align="right" width="30%">昵称：</td>
+									<td style="padding-top: 15px" align="right" width="30%">用户名：</td>
 									<td style="padding-top: 15px" align="left">
 										<input type="text" name="username" value="${sessionUser.username }" disabled="disabled" id="nickname"/>
 									</td>

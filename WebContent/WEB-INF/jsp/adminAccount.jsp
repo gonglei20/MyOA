@@ -18,12 +18,8 @@
 						//偶数行
 						mtb.tBodies[0].rows[i].style.backgroundColor = "#D3D3D3";
 					}
-				}
-				
-				
+				}				
 			}
-			
-			
 		</script>
 	</head>
 	
@@ -36,8 +32,8 @@
 		<div class="status">
 			<div class="global-width">
 				${sessionUser.username }你好！欢迎访问办公管理系统！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="location.href='loginOut.do'";>注销</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#" onclick="location.href='loginOut.do'";>注销</a>
 			</div>
 		</div>
 		<form id="myForm" name="myForm" action="userInfo!editData.action" method="post">
@@ -91,7 +87,7 @@
 						<dd>
 							<a href="forwardLeave.do" target="_self">休假</a>
 						</dd>
-					</c:if>
+						</c:if>
 						
 						<c:if test="${sessionUser.isadmin == 1 }">
 						<dd>
@@ -121,7 +117,6 @@
   </body>
 </html>
 
- <%-- <%@ include file="personInfo.jsp"%> --%>
 
 
 					<!-- 个人信息 -->
@@ -130,7 +125,7 @@
 							管理账户
 						</div>
 						<div class="pages">
-							<c:if test="${sessionUser.isadmin == 0 }">您不是管理员，没有访问权限</c:if>
+							
 							<c:if test="${sessionUser.isadmin == 1 }">
 								<table id="mtb" width="90%" border="0" cellspacing="0" cellpadding="0">
 								<tr >

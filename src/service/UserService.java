@@ -90,7 +90,12 @@ public class UserService implements IUserService{
 		mapper.insertEmail(email);
 		
 	}
-
+	@Override
+	@Transactional(readOnly=false)
+	public void insertEmail2(Email email) {
+		mapper.insertEmail2(email);
+		
+	}
 	//接收邮件
 	@Override
 	public  List<Email> findEmailByreceiveUser(String receiveUser) {
@@ -149,6 +154,8 @@ public class UserService implements IUserService{
 		// TODO Auto-generated method stub
 		return mapper.findLeaveById(id);
 	}
+
+	
 
 
 

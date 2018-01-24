@@ -7,10 +7,18 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>办公自动化管理系统</title>
 		<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" />
-		<script>
-			function setit()
-			{
-				document.forms[0].submit();
+				<script>
+			window.onload = function(){
+				var mtb = document.getElementById("mtb");
+				for(var i=0;i<mtb.tBodies[0].rows.length;i++){
+					if(i%2==0){
+						//奇数行
+						mtb.tBodies[0].rows[i].style.backgroundColor = "white";
+					}else{
+						//偶数行
+						mtb.tBodies[0].rows[i].style.backgroundColor = "#D3D3D3";
+					}
+				}				
 			}
 		</script>
 	</head>
@@ -24,8 +32,8 @@
 		<div class="status">
 			<div class="global-width">
 				${sessionUser.username }你好！欢迎访问办公管理系统！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="location.href='loginOut.do'";>注销</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#" onclick="location.href='loginOut.do'";>注销</a>
 			</div>
 		</div>
 		<form id="myForm" name="myForm" action="userInfo!editData.action" method="post">
@@ -116,7 +124,7 @@
 							休假信息列表
 						</div>
 						<div class="pages">
-							<table width="90%" border="0" cellspacing="0" cellpadding="0">
+							<table id="mtb" width="90%" border="0" cellspacing="0" cellpadding="0">
 								<tr >
 									<td>申请人</td>
 									<td>开始时间</td>
@@ -152,11 +160,12 @@
 									<td  width="20%">${leave.reason }</td>
 								</tr>
 								</c:forEach>
-								
-								<tr >
-									<td align="right" colspan="3"><br/><a href="applyLeave.do"><input type="button"  id="save" value="申请休假"  /></a></td>
-								</tr>
 								</table>
+								<div style="padding-top: 20px;text-align:center">
+								<a href="applyLeave.do"  >
+								<input type="button"  id="save" value="申请休假"  />
+								</a>
+								</div>
 								
 						</div>
 					</div>

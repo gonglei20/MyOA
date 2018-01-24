@@ -32,8 +32,8 @@
 		<div class="status">
 			<div class="global-width">
 				${sessionUser.username }你好！欢迎访问办公管理系统！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="location.href='loginOut.do'";>注销</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#" onclick="location.href='loginOut.do'";>注销</a>
 			</div>
 		</div>
 		<form id="myForm" name="myForm" action="userInfo!editData.action" method="post">
@@ -82,11 +82,11 @@
 							onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">
 							考勤管理
 						</dt>
-						
+						<c:if test="${sessionUser.isadmin == 0 }">
 						<dd>
 							<a href="forwardLeave.do" target="_self">休假</a>
 						</dd>
-					
+					</c:if>
 						
 						<c:if test="${sessionUser.isadmin == 1 }">
 						<dd>
@@ -101,11 +101,10 @@
 							onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">
 							权限管理
 						</dt>
-						<c:if test="${sessionUser.isadmin == 0 }">
 						<dd>
-							<a href="forwardLeave.do" target="_self">休假</a>
+							<a href="forwardPersonAccount.do" target="_self">个人账户</a>
 						</dd>
-					</c:if>
+					
 						<c:if test="${sessionUser.isadmin == 1 }">
 						<dd>
 							<a href="adminAccount.do" target="_self">管理账户</a>
@@ -118,14 +117,13 @@
 
 
 
-					<!-- 个人信息-->
+					<!-- 休假信息列表-->
  					<div class="action">
 						<div class="t">
 							休假信息列表
 						</div>
 						<div class="pages">
 							<table id="mtb" width="90%" border="0" cellspacing="0" cellpadding="0">
-
 								<tr align="center">
 									<td >申请人</td>
 									<td >开始时间</td>
@@ -137,10 +135,10 @@
 								</tr>
 								<c:forEach items="${leaveSessionByCheck }" var="checkLeave">
 									<tr align="center">
-									<td width="15%">${checkLeave.username } </td>
+									<td width="10%">${checkLeave.username } </td>
 									<td  width="15%">${checkLeave.starttime }</td>
-									<td  width="20%">${checkLeave.endtime }</td>
-									<td  width="20%">${checkLeave.day }</td>
+									<td  width="15%">${checkLeave.endtime }</td>
+									<td  width="10%">${checkLeave.day }</td>
 		
 									<c:if test="${checkLeave.status ==0 }">
 									<td  width="20%">
@@ -158,7 +156,7 @@
 									</td>
 									</c:if>
 									<td  width="20%">${checkLeave.reason }</td>
-									<td  width="20%">
+									<td  width="10%">
 									<a href="checkStatus.do?id=${checkLeave.id }">[审核]</a>
 									</td>
 									

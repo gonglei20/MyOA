@@ -48,8 +48,8 @@ $(function() {
 		<div class="status">
 			<div class="global-width">
 				${sessionUser.username }你好！欢迎访问办公管理系统！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="location.href='loginOut.do'";>注销</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#" onclick="location.href='loginOut.do'";>注销</a>
 			</div>
 		</div>
 		<form id="myForm" name="myForm" action="editData.do" method="post">
@@ -138,9 +138,11 @@ $(function() {
 						<div class="pages">
 							<table width="90%" border="0" cellspacing="0" cellpadding="0">
 								<tr >
-									<td style="padding-top: 15px"  align="right" width="30%">昵称：</td>
+									<td style="padding-top: 15px"  align="right" width="30%">
+									<label style="color: red">*</label>
+									用户名：</td>
 									<td style="padding-top: 15px"  align="left">
-									<input type="text" name="username" value="${sessionUser.username }"  id="nickname"/><label style="color: red">*</label>
+									<input type="text" name="username" value="${sessionUser.username }"  id="nickname"/>
 									</td>
 								</tr>
 								<tr >
@@ -160,9 +162,11 @@ $(function() {
 									</td>
 								</tr>
 								<tr >
-									<td style="padding-top: 15px"  align="right" width="30%">手机：</td>
+									<td style="padding-top: 15px"  align="right" width="30%">
+									<label style="color: red">*</label>
+									手机：</td>
 									<td style="padding-top: 15px"  align="left">
-									<input type="text" name="phone" value="${sessionUser.phone }"  id="phone"/><label style="color: red">*</label>
+									<input type="text" name="phone" value="${sessionUser.phone }"  id="phone"/>
 									</td>
 								</tr>
 								<tr >

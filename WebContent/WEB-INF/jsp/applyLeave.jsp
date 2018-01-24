@@ -19,8 +19,8 @@
 		<div class="status">
 			<div class="global-width">
 				${sessionUser.username }你好！欢迎访问办公管理系统！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="location.href='loginOut.do'";>注销</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#" onclick="location.href='loginOut.do'";>注销</a>
 			</div>
 		</div>
 		<form id="myForm" name="myForm" action="submitApply.do" method="post">
@@ -36,9 +36,41 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>办公自动化管理系统</title>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.8.3.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validate.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/messages_zh.js"></script>
 		<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" />
 	</head>
-  
+  <script type="text/javascript">
+//表单校验
+$(function() {
+	$("#myForm").validate({
+						rules : {
+							starttime:{
+								required:true
+							},
+							endtime:{
+								required:true
+							},
+							day:{
+								required:true
+							}
+						},
+						messages : {
+							starttime:{
+								required:"开始时间不能为空"
+							},
+							endtime:{
+								required:"结束时间不能为空"
+							},
+							day:{
+								required:"天数不能为空"
+							}
+						}
+
+					});
+})
+</script>
   <body>
     <div class="nav" id="nav">
 					<div class="t"></div>
@@ -107,7 +139,7 @@
 
 
 
-					<!-- 个人信息-->
+					<!-- 申请休假-->
  					<div class="action">
 						<div class="t">
 							申请休假
@@ -115,39 +147,62 @@
 						<div class="pages">
 							<table width="90%" border="0" cellspacing="0" cellpadding="0">
 								<tr >
-									<td align="right" width="30%">姓名：</td><td  align="left"><input type="text" name="username"  id="username"/></td>
+									<td style="padding-top: 10px" align="right" width="30%">姓名：</td>
+									<td style="padding-top: 10px" align="left"><input type="text" name="username"  id="username"/>
+									</td>
+								</tr>
+								<tr >								
+									<td style="padding-top: 10px" align="right" width="30%">
+										<label style="color:red">*</label>
+									开始时间：
+									</td>
+									<td style="padding-top: 10px" align="left">
+									<input type="date" name="starttime"  id="starttime"/>
+									</td>
 								</tr>
 								<tr >
-									<td align="right" width="30%">开始时间：</td><td  align="left"><input type="text" name="starttime"  id="starttime"/></td>
+									<td style="padding-top: 10px" align="right" width="30%">
+									<label style="color:red">*</label>
+									结束时间：
+									</td>
+									<td style="padding-top: 10px" align="left">
+									<input type="date" name="endtime"  id="endtime"/>
+									</td>
 								</tr>
 								<tr >
-									<td align="right" width="30%">结束时间：</td><td  align="left"><input type="text" name="endtime"  id="endtime"/></td>
+									
+									<td style="padding-top: 10px" align="right" width="30%">
+									<label style="color:red">*</label>
+									请假天数：
+									</td>
+									<td style="padding-top: 10px" align="left">
+									<input type="text" name="day"  id="day"/>
+									</td>
 								</tr>
 								<tr >
-									<td align="right" width="30%">请假天数：</td><td  align="left"><input type="text" name="day"  id="day"/></td>
+									<td style="padding-top: 10px" align="right" width="30%">请假原因：</td>
+									<td style="padding-top: 10px" align="left">
+									<textarea rows="6" cols="22" name="reason"  id="reason"></textarea>
+									</td>
 								</tr>
 								<tr >
-									<td align="right" width="30%">请假原因：</td><td  align="left"><textarea rows="6" cols="22" name="reason"  id="reason"></textarea></td>
-								</tr>
-								<tr >
-									<td align="right" width="30%">审批人：</td>
-									<td  align="left">
-									<!-- <input type="text" name="checkman"  id="checkman"/> -->
+									<td style="padding-top: 10px" align="right" width="30%">审批人：</td>
+									<td style="padding-top: 10px" align="left">
 									<select name="checkman">
 									
 										<c:forEach items="${sessionAdmin }" var="admin">
 											<option>${admin.username }</option>
 										</c:forEach>
-									
-									
-									
-										
 									</select>
 									</td>
 								</tr>
 								<tr >
-									<td align="center" colspan="2"><br/><input type="submit"  id="save" value="提交申请"  />
-									<a href="forwardLeave.do"><input type="button"  id="back" value="返回"  /></a></td>
+									<td style="padding-top: 10px" align="center" colspan="2"><br/>
+									<input type="submit"  id="save" value="提交申请"  />
+									<a href="forwardLeave.do">
+									<input type="button"  id="back" value="返回"  />
+									</a>
+									</td>
 								</tr>
 								</table>
 								

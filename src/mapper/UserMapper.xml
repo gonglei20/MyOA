@@ -51,6 +51,9 @@
 	<insert id="insertEmail" parameterType="Leave">
 		insert into useremail(senduser,receiveuser,emailtitle,emailvalue,fujian)  values(#{senduser},#{receiveuser},#{emailtitle},#{emailvalue},#{fujian})
 	</insert>
+	<insert id="insertEmail2" parameterType="Leave">
+		insert into useremail(senduser,receiveuser,emailtitle,emailvalue)  values(#{senduser},#{receiveuser},#{emailtitle},#{emailvalue})
+	</insert>
 	<!-- 接收邮件 -->
 		<select id="findEmailByreceiveUser" parameterType="String" resultType="Email">
 		  select * from useremail where receiveuser =#{receiveuser}

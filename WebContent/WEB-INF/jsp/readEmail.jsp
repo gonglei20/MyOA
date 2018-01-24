@@ -24,8 +24,8 @@
 		<div class="status">
 			<div class="global-width">
 				${sessionUser.username }你好！欢迎访问办公管理系统！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="location.href='loginOut.do'";>注销</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#" onclick="location.href='loginOut.do'";>注销</a>
 			</div>
 		</div>
 		<form id="myForm" name="myForm" action="userInfo!editData.action" method="post">
@@ -74,12 +74,14 @@
 							onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">
 							考勤管理
 						</dt>
-						
+						<dd>
+							<a href="forwardPersonAccount.do" target="_self">个人账户</a>
+						</dd>
+						<c:if test="${sessionUser.isadmin == 0 }">
 						<dd>
 							<a href="forwardLeave.do" target="_self">休假</a>
 						</dd>
-					
-						
+					</c:if>
 						<c:if test="${sessionUser.isadmin == 1 }">
 						<dd>
 							<a href="forwardCheck.do" target="_self">审核休假</a>
@@ -93,11 +95,10 @@
 							onclick="this.parentNode.className=this.parentNode.className=='open'?'':'open';">
 							权限管理
 						</dt>
-						<c:if test="${sessionUser.isadmin == 0 }">
-						<dd>
-							<a href="forwardLeave.do" target="_self">休假</a>
+
+					<dd>
+							<a href="forwardPersonAccount.do" target="_self">个人账户</a>
 						</dd>
-					</c:if>
 						<c:if test="${sessionUser.isadmin == 1 }">
 						<dd>
 							<a href="adminAccount.do" target="_self">管理账户</a>
@@ -133,7 +134,9 @@
 									<td align="right" width="30%">来自：</td><td  align="left"><input type="text" value="${sessionEmailInfo.senduser }" readonly="readonly" /></td>
 								</tr>
 								<tr >
-									<td align="right" width="30%">文件：</td><td  align="left"><a href="down.do?filename=${sessionEmailInfo.fujian }">下载</a></td>
+									<td align="right" width="30%">文件：</td><td  align="left">
+									<a href="down.do?filename=${sessionEmailInfo.fujian }">下载</a>
+									</td>
 								</tr>
 								<tr >
 									<td align="center" colspan="2"><br/><a href="backReceiveEmail.do"><input type="button" value="返回"  /></a></td>
@@ -148,9 +151,9 @@
 			</div>
 		</div>
 		</form>
+		</script>
 		<div class="copyright">
 			Copyright &nbsp; &copy; &nbsp; 
 		</div>
- 
 	</body>
 </html>

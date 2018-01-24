@@ -28,6 +28,7 @@ public interface IUserService {
 	void updateStatus2(Integer id);
 	//发送邮件
 	void insertEmail(Email email);
+	void insertEmail2(Email email);
 	//接收邮件
 	 List<Email> findEmailByreceiveUser(String receiveUser);
 	 //更新是删除进入回收站
@@ -44,6 +45,7 @@ public interface IUserService {
 	List<User> findAllAdmin(Integer isadmin);
 	//审核请假详情
 	Leave findLeaveById(Integer id);
+	
 
 
 	
